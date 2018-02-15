@@ -1,0 +1,93 @@
+.btn a a:link a:visited {
+  color: white !important;
+}
+
+.bg-info a:hover {
+  color: black !important;
+}
+
+.form-horizontal {
+  padding: 10px;
+}
+
+#navRole {
+  background: #5e5e5e;
+}
+
+.main-content {
+  background-color: white;
+  padding: 0px;
+}
+
+.main-content img {
+  vertical-align: text-top;
+  width: 75%;
+  padding: 15px;
+}
+
+.main-footer {
+  background-color: #2e3e50;
+  font-color: white;
+  padding: 10px;
+}
+
+.main-footer img {
+  vertical-align: text-top;
+  width: 75%;
+  padding: 15px;
+}
+
+.records-row {
+  margin: 2px;
+}
+
+.records-button {
+  padding-top: 10px;
+}
+
+.records-title {
+  padding: 5px;
+  color: white;
+}
+
+.records input {
+  margin-bottom: 5px;
+}
+
+.records select {
+  margin-bottom: 5px;
+}
+
+.records thead {
+  background-color: #2e3e50;
+  color: white;
+  padding-bottom: 20px;
+}
+
+.records tbody {
+  background-color: white;
+}
+
+.map-program {
+  height: 400px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.paginate_button {
+  padding: 10px;
+}
+
+.paginate_button a:link {
+  color: #303e50 !important;
+}
+
+.previous a:link {
+  color: #303e50 !important;
+}
+
+#modalimg img {
+  position: relative;
+  width: 50%;
+}
+
