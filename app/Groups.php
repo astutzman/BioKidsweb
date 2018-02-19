@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Groups extends Model
 {
@@ -21,6 +22,12 @@ class Groups extends Model
     public function users()
     {
         return $this->hasOne('App\User', 'id', 'user_id');
+    }
+
+    public function scopeMydata($query)
+    {
+        $user = Auth::user() ;
+        return $query->where('user_id', '==', $user);
     }
 
     public function observations()

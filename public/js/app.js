@@ -31951,7 +31951,7 @@ var app = new Vue({
 							}
 							//console.log($('#zipField').value);
 
-							infowindow.setContent('<strong>The street hello address is:</strong><br /><br />' + results[0].formatted_address + '<br /><br />' + '<strong>Your form has been updated with this address.<br />  Click "Submit" to save your information.</strong>');
+							infowindow.setContent('<strong>The street address is:</strong><br /><br />' + results[0].formatted_address + '<br /><br />' + '<strong>Your form has been updated with this address.<br />  Click "Submit" to save your information.</strong>');
 
 							//show marker with address
 							infowindow.open(map, vm.marker);
