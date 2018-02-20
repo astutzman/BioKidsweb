@@ -200,16 +200,17 @@ var app = new Vue({
 				        scrollX: true,
 				        columnDefs:[
 				        	{
-				        		targets: [1,5,6,9,12,15,16],
+				        		targets: [2,4,8,9,13],
 				        		className: 'noVis',
 				        		visible: false
 				        	},
 				        	{
 				        	    render: function ( data, type, row ) {
-				        	    	return '<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#obvmodal" onClick="updateModal('+"'"+data+"'"+')">View Image</button>';
+				        	    	return '<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#obvmodal" onClick="updateModal('+"'"+data+"'"+')">View</button>';
 				                },
 				                targets: 14
-				            },   	
+				            } 
+
 				        ],
 				        buttons: [
 					        {
@@ -218,24 +219,25 @@ var app = new Vue({
 					        }
 				        ],
 				        columns:[
-				        	{data: 'id'},
-				        	{data: 'group_id'},
-				        	{data: 'howSensed'},
-				        	{data: 'whatSensed'},
-				        	{data: 'whereSensed'},
-				        	{data: 'plantKind'},
-				        	{data: 'grassKind'},
-				        	{data: 'howMuchPlant'},
-				        	{data: 'howManySeen'},
-				        	{data: 'animalGroup'},
-				        	{data: 'animalType'},
-				        	{data: 'animalSubType'},
-				        	{data: 'note'},
-				        	{data: 'howManyIsExact'},
-				        	{data: 'photoLocation'},
-				        	{data: 'created_at'},
-				        	{data: 'updated_at'},
-				        	{data: 'obvType'}
+				        	{data: 'id', title: 'ID'},
+				        	{data: 'obvType', title: 'Type'},
+				        	{data: 'animalGroup', title:'Animal'},
+				        	{data: 'animalType', title:'Type'},
+				        	{data: 'animalSubType', title: 'Sub Type'},				        	
+				        	{data: 'howSensed', title:'How'},
+				        	{data: 'whatSensed', title: 'What'},
+				        	{data: 'whereSensed', title:'Where'},
+				        	{data: 'plantKind', title: 'Plant'},
+				        	{data: 'grassKind', title: 'Grass'},
+				        	{data: 'howMuchPlant', title: 'Plant#'},
+				        	{data: 'howManySeen', title: 'Count'},
+				        	{data: 'howManyIsExact', title: 'Exact#'},				        	
+				        	{data: 'note', title: 'Note'},
+				        	{data: 'photoLocation', title:'Image'},
+				        	{data: 'groups.name', title: 'Group'},
+				        	{data: 'groups.users.programs.program', title: 'Program'},				        	
+				        	{data: 'created_at', type: 'date-dd-mmm-yyyy', target: 17,title: 'Date'}
+
 				        ]
 
 				    });

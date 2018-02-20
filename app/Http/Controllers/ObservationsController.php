@@ -37,12 +37,13 @@ class ObservationsController extends Controller
     public function datatables()
     {
        
-       $datatables = Observations::all();
+       //datatables = Observations::all();
+        $datatables = Observations::with('groups','groups.users.programs')->get();
 
        return Datatables::of($datatables)->make(true);
     }
 
-    //API - AJAX regurn a specific teacher's data
+    //API - AJAX return a specific teacher's data
     public function mydatatables()
     {
        

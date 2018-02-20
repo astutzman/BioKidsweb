@@ -20,28 +20,7 @@
 		
         <div id ="obvTable" class="well">
             <table id="observeTable" class="display table table-striped table-hover" width="100%">
-    			<thead>
-    			<tr class="info">
-    			<th>ID</th>
-                <th>Group</th>
-                <th>How</th>
-                <th>What</th>
-                <th>Where</th>
-                <th>Plants</th>
-                <th>Grass</th>
-                <th>Plant Num</th>
-                <th>Count</th>
-                <th>Animal</th>
-                <th>Animal Type</th>
-                <th>Sub Type</th>
-                <th>Note</th>
-                <th>Exact Count</th>
-                <th>Image</th>
-                <th>Created</th>
-                <th>Updated</th>
-                <th>Type</th>
-               </tr>
-              </thead>
+
 
     		</table>
     	</div>

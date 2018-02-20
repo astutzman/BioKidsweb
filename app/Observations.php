@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon;
 
 class Observations extends Model
 {
@@ -31,6 +32,11 @@ class Observations extends Model
 
         return null;
         
+    }
+
+    public function getCreatedAtAttribute($value) {
+        $date = new \Carbon\Carbon($value);
+        return $date->format('m-d-Y');
     }
 
     /* get group and teacher info */
