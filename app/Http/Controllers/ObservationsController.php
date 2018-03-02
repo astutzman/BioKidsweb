@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Observations;
 use App\Programs;
 use App\Groups;
+use Auth;
 use Geocoder\Geocoder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -12,10 +13,11 @@ use Yajra\Datatables\Datatables;
 
 class ObservationsController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -25,31 +27,13 @@ class ObservationsController extends Controller
        return view('observations.index', compact('observations'));
     }
 
-    public function teachdata()
-    {
-       
-       $observations = Observations::all();
-
-       return view('observations.teachdata', compact('observations'));
-    }
-
+    
     //API - AJAX return of all Observation data
     public function datatables()
     {
        
        //datatables = Observations::all();
         $datatables = Observations::with('groups','groups.users.programs')->get();
-
-       return Datatables::of($datatables)->make(true);
-    }
-
-    //API - AJAX return a specific teacher's data
-    public function mydatatables()
-    {
-       
-       $datatables = Groups::mydata()->get();
-
-       $datatables->load('observations');
 
        return Datatables::of($datatables)->make(true);
     }

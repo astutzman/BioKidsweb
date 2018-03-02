@@ -44,6 +44,7 @@ class Observations extends Model
     {
         return $this->hasOne('App\Groups', 'id', 'group_id');
     }
+    
     public function pgroups()
     {
         return $this->belongsTo('App\Groups', 'group_id');

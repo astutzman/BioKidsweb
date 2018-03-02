@@ -23,7 +23,7 @@ var app = new Vue({
 	el: '#app',
 
 	data: {
-			modalimg: '', obvimg: '', maplng:'', maplat:'', mapadr:'', mapcity:'', mapstate:'', mapzip:'', geocode:'', infowindow:''
+			modalimg: '', obvimg: '', maplng:'', maplat:'', mapadr:'', mapcity:'', mapstate:'', mapzip:'', geocode:'', infowindow:'', dataURL:''
 
 	},
 
@@ -36,8 +36,10 @@ var app = new Vue({
 		 		this.addMarker();//add onClick Event
 			}
 			//if Location
-		 	if(~window.location.pathname.indexOf("observation"))
+		 	if(~window.location.pathname.indexOf("observation")|| ~window.location.pathname.indexOf("teach-data"))
 		 	{
+		 		if(~window.location.pathname.indexOf("observation")) {this.dataURL = '/observations/datatables';}
+		 		if(~window.location.pathname.indexOf("teach-data")) {this.dataURL = '/observations/mydatatables';}
 		 		this.showDataTable();
 		 	}
 
@@ -189,13 +191,15 @@ var app = new Vue({
 
 				var vm = this;
 
+
+
 				$(document).ready(function() {
 				    dataTable = $('#observeTable').DataTable({
 				    	dom: 'Bfrtip',
 				    	pagingType: 'simple_numbers',
 				        processing: true,
 				        serverSide: true,
-				        ajax: "https://phillysci.dev/observations/datatables",
+				        ajax: vm.dataURL,
 				        defaultContent: "<i>empty</i>",
 				        scrollX: true,
 				        columnDefs:[

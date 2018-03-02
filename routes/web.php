@@ -19,8 +19,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 /* OBSERVATION METHODS */
 Route::get('/observations', ['uses' => 'ObservationsController@index']);
+Route::get('/teach-data', ['uses' => 'TeachersController@teachdata']);
 Route::get('/observations/datatables', ['as' => 'observations.datatables', 'uses' => 'ObservationsController@datatables']);
-Route::get('/observations/mydatatables', ['as' => 'observations.mydatatables', 'uses' => 'ObservationsController@mydatatables']);
+Route::get('/observations/mydatatables', ['as' => 'teachers.mydatatables', 'uses' => 'TeachersController@mydatatables']);
 Route::get('observations/maps', ['uses' => 'ObservationsController@maps']);
 Route::get('/observations/mapdata', ['as' => 'observations.mapdata', 'uses' => 'ObservationsController@mapdata']);
 

@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Observations;
+use App\Groups;
+use Illuminate\Http\Response;
+use Yajra\Datatables\Datatables;
+use Auth;
 
 class TeachersController extends Controller
 {
@@ -95,5 +100,26 @@ class TeachersController extends Controller
 
           return redirect('/teachers');
     }
+
+       //API - AJAX return a specific teacher's data
+    public function mydatatables()
+    {
+       
+       $user_id = Auth::user()->id;
+       $datatables = Groups::where('user_id', $user_id)->get();
+       $datatables->load('observations');
+       dd($datatables);
+
+       return Datatables::of($datatables)->make(true);
+    }
+
+    public function teachdata()
+    {
+       
+       $observations = Observations::all();
+
+       return view('observations.teach-data', compact('observations'));
+    }
+
 
 }
