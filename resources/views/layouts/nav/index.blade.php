@@ -18,7 +18,7 @@
                     <ul class="nav navbar-nav">
                       <li class="{{ set_active('/') }}" ><a href="/">Home</a></li>
                       <li class="{{ set_active('observations*') }}" ><a href="/observations">Observations</a></li>
-                      <li class="{{ set_active('about')}}"><a href="about">About</a></li>
+                      <li class="{{ set_active('about')}}"><a href="/about">About</a></li>
                     </ul>
                     @auth
                       <!--Admin Navigation -->
