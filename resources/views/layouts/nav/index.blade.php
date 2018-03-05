@@ -17,23 +17,23 @@
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                       <li class="{{ set_active('/') }}" ><a href="/">Home</a></li>
-                      <li class="{{ set_active('observations*') }}" ><a href="/observations">Observations</a></li>
-                      <li class="{{ set_active('about')}}"><a href="/about">About</a></li>
+                      <li class="{{ set_active('observations*') }}" ><a href="{{url('/observations')}}">Observations</a></li>
+                      <li class="{{ set_active('about')}}"><a href="{{url('/about')}}">About</a></li>
                     </ul>
                     @auth
                       <!--Admin Navigation -->
                        @if(Auth::user()->role == 'admin')                     
                         <ul id="navRole" class="nav navbar-nav danger">
-                          <li class="{{ set_active('programs*') }}" style="border:solid 2px #2d3e4f;"><a href="/programs">Programs</a></li>
-                          <li class="{{ set_active('teachers*')}}" style="border:solid 2px #2d3e4f;"><a href="/teachers">Teachers</a></li>
+                          <li class="{{ set_active('programs*') }}" style="border:solid 2px #2d3e4f;"><a href="{{url('/programs')}}">Programs</a></li>
+                          <li class="{{ set_active('teachers*')}}" style="border:solid 2px #2d3e4f;"><a href="{{url('/teachers')}}">Teachers</a></li>
                         </ul>
                         @endif
                       <!--Teacher Navigation -->
                       @if(Auth::user()->role == 'teacher')
                         <ul id="navRole" class="nav navbar-nav ">
-                          <li  class="{{ set_active('groups*')}}"style="border:solid 2px #2d3e4f;"><a href="/groups">Groups</a></li>
-                          <li  class="{{ set_active('locations*') }}"style="border:solid 2px #2d3e4f;"><a href="/locations">Locations</a></li>
-                          <li class="{{ set_active('teach-data*') }}"style="border:solid 2px #2d3e4f;"><a href="/teach-data">My Observations</a></li>
+                          <li  class="{{ set_active('groups*')}}"style="border:solid 2px #2d3e4f;"><a href="{{url('/groups')}}">Groups</a></li>
+                          <li  class="{{ set_active('locations*') }}"style="border:solid 2px #2d3e4f;"><a href="{{url('/locations')}}">Locations</a></li>
+                          <li class="{{ set_active('teach-data*') }}"style="border:solid 2px #2d3e4f;"><a href="{{url('/teach-data')}}">My Observations</a></li>
                         </ul>
                       @endif
                     @endauth

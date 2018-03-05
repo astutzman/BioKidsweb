@@ -21,7 +21,7 @@
 				<div class="panel panel-info">
 					<div class="panel-heading text-center">
 						<h4><i class="fa fa-database fa-3x"></i></h4>
-						<h4><a style="color:#ffffff;" href="observations" >View Biodiversity Data</a></h4>
+						<h4><a style="color:#ffffff;" href="{{url('/observations')}}" >View Biodiversity Data</a></h4>
 					</div>
 				</div>
 			</div>
@@ -37,7 +37,7 @@
 				<div class="panel panel-danger">
 					<div class="panel-heading text-center">
 						<h4><i class="fa fa-plus-square fa-3x"></i> </h4>
-						<h4><a style="color:#ffffff;" href="register">Create an Account</a></h4>
+						<h4><a style="color:#ffffff;" href="{{url('/register')}}">Create an Account</a></h4>
 					</div>
 				</div>
 			</div>
