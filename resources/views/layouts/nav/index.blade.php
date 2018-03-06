@@ -11,14 +11,14 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">Philly Scientists</a>
+                    <a class="navbar-brand" href="{{url('/')}}">Philly Scientists</a>
                   </div>
 
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                       <li class="{{ set_active('/') }}" ><a href="/">Home</a></li>
                       <li class="{{ set_active('observations*') }}" ><a href="{{url('/observations')}}">Observations</a></li>
-                      <li class="{{ set_active('about')}}"><a href="{{url('/about')}}">About</a></li>
+                      <li class="{{ set_active('about')}}"><a href="{{url('/help')}}">Help</a></li>
                     </ul>
                     @auth
                       <!--Admin Navigation -->

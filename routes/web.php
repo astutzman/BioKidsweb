@@ -17,6 +17,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::view('/help', 'help');
+
 /* OBSERVATION METHODS */
 Route::get('/observations', ['uses' => 'ObservationsController@index']);
 Route::get('/teach-data', ['uses' => 'TeachersController@teachdata']);
