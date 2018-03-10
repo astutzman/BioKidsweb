@@ -16,7 +16,7 @@
 
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                      <li class="{{ set_active('/') }}" ><a href="/">Home</a></li>
+                      <li class="{{ set_active('/') }}" ><a href="{{ url('/') }}">Home</a></li>
                       <li class="{{ set_active('observations*') }}" ><a href="{{url('/observations')}}">Observations</a></li>
                       <li class="{{ set_active('about')}}"><a href="{{url('/help')}}">Help</a></li>
                     </ul>

@@ -21,8 +21,8 @@
 				<h3 class="panel-title">Register</h3>
 			</div>
 			<div class="panel-body">
-				To begin, teachers must <a href="/register">register</a> and create an account with Philly Scientists.  Besides supplying the basic name and email address, teachers need to select the school or program that they are with as well.
-				<div style="padding:4px;"><a class="btn btn-info">Register Now</a></div>
+				To begin, teachers must <a href="{{ url('/register')}}">register</a> and create an account with Philly Scientists.  Besides supplying the basic name and email address, teachers need to select the school or program that they are with as well.
+				<div style="padding:4px;"><a class="btn btn-info" href="{{ url('/register')}}">Register Now</a></div>
 			</div>
 		</div>
 		<div class="panel panel-primary">

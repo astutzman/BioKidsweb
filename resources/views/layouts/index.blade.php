@@ -34,6 +34,7 @@
      })();
 
     </script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
   </head>
   
   <body>
@@ -45,7 +46,9 @@
         @if(Session::has('flash_message'))
           <div alert class="alert alert-dismissible alert-success">{{ Session::get('flash_message') }}</div>
         @endif
-
+        @if(Session::has('flash_error'))
+          <div alert class="alert alert-dismissible alert-danger">{{ Session::get('flash_error') }}</div>
+        @endif
         @yield('content')
       </div>
       

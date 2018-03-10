@@ -11,9 +11,9 @@
 		  				<tbody class="records">
 		  				@foreach($groups as $group)
 			  				<tr>
-			  					<td><a href="groups/{{$group->id}}">{{$group->name}}</a></td>
+			  					<td><a href="{{ url('groups/'.$group->id) }}">{{$group->name}}</a></td>
 		  						<td>{{$group->unique_code}}</td>
-		  						<td><a href="groups/{{$group->id}}/edit">Edit</a></td>
+		  						<td><a href="{{ url('groups/'.$group->id.'/edit') }}">Edit</a></td>
 			  				</tr>
 			  			@endforeach
 			  			</tbody>

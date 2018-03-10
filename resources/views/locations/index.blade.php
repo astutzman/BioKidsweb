@@ -11,9 +11,9 @@
 		  				<tbody class="records">
 		  				@foreach($locations as $location)
 			  				<tr>
-			  					<td><a href="locations/{{$location->id}}">{{$location->name}}</a></td>
+			  					<td><a href="{{ url('locations/'.$location->id) }}">{{$location->name}}</a></td>
 		  						<td>{{$location->address}}</td>
-		  						<td><a href="locations/{{$location->id}}/edit">Edit</a></td>
+		  						<td><a href="{{ url('locations/'.$location->id) }}/edit">Edit</a></td>
 			  				</tr>
 			  			@endforeach
 			  			</tbody>

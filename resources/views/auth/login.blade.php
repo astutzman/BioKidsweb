@@ -54,14 +54,19 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-md-8 col-md-offset-4" >
+                                <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}">
+                                    
+                                </div>
+                                <div style="padding:8px;">
+                                    <button type="submit" class="btn btn-primary">
                                     Login
-                                </button>
-
+                                    </button>
+                                </div>
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
                                 </a>
+
                             </div>
                         </div>
                     </form>

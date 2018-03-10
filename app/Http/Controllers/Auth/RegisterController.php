@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Traits\reCaptchaTrait;
 
 use App\Programs;
 
@@ -23,6 +24,7 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+    use reCaptchaTrait;
 
     /**
      * Where to redirect users after registration.
@@ -49,12 +51,27 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+
+        // call the verifyCaptcha method to see if Google approves
+        $data['captcha-verified'] = $this->verifyCaptcha($data['g-recaptcha-response']);
+
+        $validator = Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'program_id' => 'required',
             'password' => 'required|string|min:6|confirmed',
-        ]);
+            'password_confirmation' => 'required|same:password',
+            'g-recaptcha-response'  => 'required'
+        ]
+
+    );
+        //flash error message for recaptcha error
+        if(!$data['captcha-verified'])
+        {
+            \Session::flash('flash_error', 'Please verify that you are not a robot!');
+        }
+
+        return $validator;
     }
 
     /**

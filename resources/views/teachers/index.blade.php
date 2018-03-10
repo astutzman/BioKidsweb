@@ -12,9 +12,9 @@
 			  				@foreach($teachers as $teacher)
 				  				<tr>
 				  					<td><a href="teachers/{{$teacher->id}}">{{$teacher->name}}</a></td>
-			  						<td><a href="programs/{{$teacher->program_id}}">{{$teacher->programs->program}}</a></td>
+			  						<td><a href="{{ url('programs/'.$teacher->program_id) }}">{{$teacher->programs->program}}</a></td>
 
-				  					<td><a href="teachers/{{$teacher['id']}}/edit">Edit</a></td>
+				  					<td><a href="{{ url('teachers/'.$teacher['id']) }}/edit">Edit</a></td>
 				  				</tr>
 				  			@endforeach
 @endsection

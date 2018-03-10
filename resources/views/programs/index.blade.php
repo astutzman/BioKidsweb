@@ -12,10 +12,10 @@
 		  				<tbody>
 		  				@foreach($programs as $program)
 			  				<tr>
-			  					<td><a href="programs/{{$program->id}}">{{$program['program']}}</a></td>
+			  					<td><a href="{{ url('programs/'.$program->id) }}">{{$program['program']}}</a></td>
 		  						<td>{{$program['address']}}</td>
-			  					<td><a href="program/teachers/{{$program['id']}}">Teachers</a></td>
-			  					<td><a href="programs/{{$program['id']}}/edit">Edit</a></td>
+			  					<td><a href="{{ url('program/teachers/'.$program['id']) }}">Teachers</a></td>
+			  					<td><a href="{{ url('programs/'.$program['id']) }}/edit">Edit</a></td>
 			  				</tr>
 			  			@endforeach
 			  			</tbody>

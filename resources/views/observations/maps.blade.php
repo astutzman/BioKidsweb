@@ -14,13 +14,13 @@
 
     <div class="container">
         <ul class="nav nav-pills nav-inverse" style="padding:5px;">
-            <li class=""><a href="../observations">Data</a></li>
-            <li class="active"><a href="maps">Map</a></li>
+            <li class=""><a href="{{ url('/observations')}}">Data</a></li>
+            <li class="active"><a href="{{ url('/observations/maps') }}">Map</a></li>
         </ul>
         <div class="text-right" style="padding-left:20px;">Map Filters:
-                <span><a href="maps">Programs and Groups</a></span>
+                <span><a href="{{ url('maps') }}">Programs and Groups</a></span>
                 <span>|</span>
-                <span><a href="maps?filter=observations">Observation Map</a></span>
+                <span><a href="{{ url('maps?filter=observations') }}">Observation Map</a></span>
         </div>
 		
         <div id ="obvMap" class="well">
