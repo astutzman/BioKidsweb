@@ -31988,7 +31988,7 @@ var app = new Vue({
 					defaultContent: "<i>empty</i>",
 					scrollX: true,
 					columnDefs: [{
-						targets: [2, 4, 8, 9, 13],
+						targets: [2, 4, 9, 10, 12, 13],
 						className: 'noVis',
 						visible: false
 					}, {
@@ -32001,7 +32001,7 @@ var app = new Vue({
 						extend: 'colvis',
 						columns: ':not(.noVis)'
 					}],
-					columns: [{ data: 'id', title: 'ID' }, { data: 'obvType', title: 'Type' }, { data: 'animalGroup', title: 'Animal' }, { data: 'animalType', title: 'Type' }, { data: 'animalSubType', title: 'Sub Type' }, { data: 'howSensed', title: 'How' }, { data: 'whatSensed', title: 'What' }, { data: 'whereSensed', title: 'Where' }, { data: 'plantKind', title: 'Plant' }, { data: 'grassKind', title: 'Grass' }, { data: 'howMuchPlant', title: 'Plant#' }, { data: 'howManySeen', title: 'Count' }, { data: 'howManyIsExact', title: 'Exact#' }, { data: 'note', title: 'Note' }, { data: 'photoLocation', title: 'Image' }, { data: 'groups.name', title: 'Group' }, { data: 'groups.users.programs.program', title: 'Program' }, { data: 'created_at', type: 'date-dd-mmm-yyyy', target: 17, title: 'Date' }]
+					columns: [{ data: 'id', title: 'ID' }, { data: 'obvType', title: 'Type' }, { data: 'animalGroup', title: 'Animal' }, { data: 'animalType', title: 'Type' }, { data: 'animalSubType', title: 'Sub Type' }, { data: 'howSensed', title: 'How?' }, { data: 'animalPosition', title: 'Where?' }, { data: 'animalAction', title: 'Doing?' }, { data: 'plantKind', title: 'Plant' }, { data: 'grassKind', title: 'Grass' }, { data: 'howMuchPlant', title: 'Plant#' }, { data: 'howManySeen', title: 'Count' }, { data: 'howManyIsExact', title: 'Exact#' }, { data: 'note', title: 'Note' }, { data: 'photoLocation', title: 'Image' }, { data: 'groups.name', title: 'Group' }, { data: 'groups.users.programs.program', title: 'Program' }, { data: 'created_at', type: 'date-dd-mmm-yyyy', target: 17, title: 'Date' }]
 
 				});
 			});

@@ -204,7 +204,7 @@ var app = new Vue({
 				        scrollX: true,
 				        columnDefs:[
 				        	{
-				        		targets: [2,4,8,9,13],
+				        		targets: [2,4,9,10,12,13],
 				        		className: 'noVis',
 				        		visible: false
 				        	},
@@ -228,9 +228,9 @@ var app = new Vue({
 				        	{data: 'animalGroup', title:'Animal'},
 				        	{data: 'animalType', title:'Type'},
 				        	{data: 'animalSubType', title: 'Sub Type'},				        	
-				        	{data: 'howSensed', title:'How'},
-				        	{data: 'whatSensed', title: 'What'},
-				        	{data: 'whereSensed', title:'Where'},
+				        	{data: 'howSensed', title:'How?'},
+				        	{data: 'animalPosition', title:'Where?'},
+				        	{data: 'animalAction', title:'Doing?'},
 				        	{data: 'plantKind', title: 'Plant'},
 				        	{data: 'grassKind', title: 'Grass'},
 				        	{data: 'howMuchPlant', title: 'Plant#'},
