@@ -31,7 +31,7 @@
 
                     <div class="row">
                             <div class="col-sm-12">
-                                <a href="/{{ strtolower($template_vars['titlepl'])}}/{{ $template_vars['title_id'] }}/edit" class="btn btn-primary">Edit</a>
+                                <a href="{{ url('/'.strtolower($template_vars['titlepl']).'/'.$template_vars['title_id']) }}/edit" class="btn btn-primary">Edit</a>
                             </div>
                     </div>
 
