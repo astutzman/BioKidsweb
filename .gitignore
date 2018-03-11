@@ -2,6 +2,8 @@
 /public/hot
 /public/images/obv-images
 /public/storage
+/public/addObservation.php
+/public/verifyGroup.php
 /storage/*.key
 /vendor
 /.idea
