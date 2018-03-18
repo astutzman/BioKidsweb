@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Observations;
 use App\Programs;
 use App\Groups;
+use DB;
 use Auth;
 use Geocoder\Geocoder;
 use Illuminate\Http\Request;
@@ -29,11 +30,26 @@ class ObservationsController extends Controller
 
     
     //API - AJAX return of all Observation data
-    public function datatables()
+    public function datatables(Request $request)
     {
        
-       //datatables = Observations::all();
-        $datatables = Observations::with('groups','groups.users.programs')->get();
+        $url = $request->fullurl();
+
+        //check path
+        if(strpos($url,'teach')) //teacher specific data
+        {
+            $user_id = Auth::user()->id;
+            $user_groups = DB::table('groups')->select('id as group_id')->where('user_id', $user_id)->get();
+            $groups = "";
+            foreach($user_groups as $g){$groups .= $g->group_id.',';}
+            $groups = substr($groups, 0, -1); //remove last comma
+
+            $datatables = Observations::wherein('group_id', [$groups])->with('groups','groups.users.programs')->get();
+        }
+        else//all data
+        {
+            $datatables = Observations::with('groups','groups.users.programs')->get();
+        }
 
        return Datatables::of($datatables)->make(true);
     }
@@ -56,18 +72,30 @@ class ObservationsController extends Controller
        
        $mapdata = null;
 
-       if(!$filter)
-       {
-            $mapdata = Programs::all();
-            $mapdata->load('users', 'users.groups', 'users.groups.observations.pgroups');
+           if(!$filter)
+           {
+                
+                if($request->type) //get teacher map data
+                {
+                $user_id = Auth::user()->id;
+                $user_prog = DB::table('users')->select('program_id')->where('id', $user_id)->first();
 
-       }
-       elseif ($filter === 'observations') 
-       {
-            $mapdata = Observations::all();
+                $mapdata = Programs::where('id', $user_prog->program_id)->get();
+                $mapdata->load('users', 'users.groups', 'users.groups.observations.pgroups');
+                }
+                else //get all data
+                {
+                $mapdata = Programs::all();
+                $mapdata->load('users', 'users.groups', 'users.groups.observations.pgroups');
+                }
 
-            $mapdata->load('groups', 'groups.users.programs');
-       }
+           }
+           elseif ($filter === 'observations') 
+           {
+                $mapdata = Observations::all();
+
+                $mapdata->load('groups', 'groups.users.programs');
+           }
        
 
        return $mapdata->toArray();

@@ -36,19 +36,28 @@ var app = new Vue({
 		 		this.addMarker();//add onClick Event
 			}
 			//if Location
-		 	if(~window.location.pathname.indexOf("observation")|| ~window.location.pathname.indexOf("teach-data"))
+		 	if(~window.location.pathname.indexOf("observation"))
 		 	{
-		 		if(~window.location.pathname.indexOf("observation")) {this.dataURL = '/observations/datatables';}
-		 		if(~window.location.pathname.indexOf("teach-data")) {this.dataURL = '/observations/mydatatables';}
+		 		this.dataURL = '/observations/datatables';
 		 		this.showDataTable();
 		 	}
-
-		 	//if Obv Map
-		 	if(~window.location.pathname.indexOf("map"))
+		 	if(~window.location.pathname.indexOf("teach-data"))
 		 	{
+		 		this.dataURL = '/observations/datatables?type=teach';
+		 		this.showDataTable();
+		 	}
+		 	//if Obv Map
+		 	if(~window.location.pathname.indexOf("observations/map"))
+		 	{
+		 		this.dataURL = '/observations/mapdata';		 		
 		 		this.showObvMap();
 		 	}
-
+		 	//if Obv Map
+		 	if(~window.location.pathname.indexOf("teach-data/map"))
+		 	{
+		 		this.dataURL = '/observations/mapdata?type=teach';
+		 		this.showObvMap();
+		 	}
 	},
 
 	components: {
@@ -278,7 +287,7 @@ var app = new Vue({
         	//GET OBSERVATIONS BY PROGRAM
         	if(!filter)
         	{
-        	 $.getJSON("mapdata", function(result){
+        	 $.getJSON(this.dataURL, function(result){
 
         	 		//loop through JSON data
 					$.each(result, function(i, field){

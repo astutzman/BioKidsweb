@@ -118,7 +118,17 @@ class TeachersController extends Controller
        
        $observations = Observations::all();
 
-       return view('observations.teach-data', compact('observations'));
+       return view('teachers.observations', compact('observations'));
+    }
+
+    //return teacher's map data to view
+    public function maps(Request $request)
+    {
+
+       $filter = $request->filter;
+       $observations = Observations::all();
+
+       return view('teachers.maps', compact('observations', 'filter'));
     }
 
 

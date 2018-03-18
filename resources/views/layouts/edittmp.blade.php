@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-lg-6">
                    <div class="well bs-component" banner="id">
-                        <form class="form-horizontal" method="POST" action="/{{strtolower($template_vars['titlepl'])}}/{{$template_vars['title_id']}}">
+                        <form class="form-horizontal" method="POST" action="{{url('/'.strtolower($template_vars['titlepl']).'/'.$template_vars['title_id'])}}">
                             <fieldset>
                                 {{ method_field('PATCH') }}
                                 {{ csrf_field() }}
