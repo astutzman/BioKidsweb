@@ -100,6 +100,48 @@ class ObservationsController extends Controller
 
        return $mapdata->toArray();
     }
+
+    public function typedata(Request $request)
+    {
+
+        $obvCount = Observations::count();
+        $animalGroup = DB::table('observations')->distinct()->select(DB::raw('animalGroup as typeGroup'), DB::raw('count(*) as typeCount'))->where('animalGroup', '!=', 'null')->groupBy('animalGroup')->get();
+
+        //add style color
+        //remove "-type" from end of string
+        $animalGroup->map(function($animal) {
+            $animal->styleColor = 'info';
+            $animal->typeGroup = ucfirst(substr($animal->typeGroup, 0, -5));
+
+            return $animal;
+        });
+
+
+
+        $plantType = DB::table('observations')->distinct()->select(DB::raw('plantKind as typeGroup'), DB::raw('count(*) as typeCount'))->where('plantKind', '!=', 'null')->groupBy('plantKind')->get();
+
+        //dd($plantType);
+        //change specific plant with "plant"
+        $plantType->each(function($plant) {
+        
+            $plant->typeGroup = 'Plant';
+            $plant->styleColor = 'success';
+            return $plant;
+        });
+
+        $typeData = $animalGroup;
+        $typeData = $typeData->merge($plantType);
+        
+
+        //sort data by type
+        $typeData->sortBy('typeGroup');
+
+       // dd($typeData);
+
+        return view('observations.progress', compact('typeData'), compact('obvCount'));
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *

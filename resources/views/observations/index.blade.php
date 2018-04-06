@@ -16,6 +16,7 @@
         <ul class="nav nav-pills nav-inverse" style="padding:5px;">
             <li class="active"><a href="#">Data</a></li>
             <li class=""><a href="{{ url('observations/maps') }}">Map</a></li>
+            <li class=""><a href="{{ url('observations/progress') }}">Charts</a></li>
         </ul>
 		
         <div id ="obvTable" class="well">

@@ -27,6 +27,7 @@ Route::get('/observations/mydatatables', ['as' => 'teachers.mydatatables', 'uses
 Route::get('observations/maps', ['uses' => 'ObservationsController@maps']);
 Route::get('teach-data/maps', ['uses' => 'TeachersController@maps']);
 Route::get('/observations/mapdata', ['as' => 'observations.mapdata', 'uses' => 'ObservationsController@mapdata']);
+Route::get('observations/progress', ['uses' => 'ObservationsController@typedata']);
 
 /* PROGRAM METHODS */
 Route::get('/programs', ['uses' => 'ProgramsController@index']);

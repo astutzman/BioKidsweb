@@ -235,7 +235,7 @@ var app = new Vue({
 				        	{data: 'id', title: 'ID'},
 				        	{data: 'obvType', title: 'Type'},
 				        	{data: 'animalGroup', title:'Animal'},
-				        	{data: 'animalType', title:'Type'},
+				        	{data: 'animalType', title:'Animal Type'},
 				        	{data: 'animalSubType', title: 'Sub Type'},				        	
 				        	{data: 'howSensed', title:'How?'},
 				        	{data: 'animalPosition', title:'Where?'},
