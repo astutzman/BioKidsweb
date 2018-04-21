@@ -10,7 +10,7 @@
     <!--<link rel="stylesheet" href="/css/bootstrap.min.css" media="screen">-->
     <link rel="stylesheet" href="{{url('/css/app.css')}}">
       <link rel="stylesheet" href="{{url('/css/custom.css')}}">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 

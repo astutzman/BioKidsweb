@@ -68,8 +68,8 @@ class GroupsController extends Controller
        //save new record
         $request['user_id'] = Auth::user()->id;
         $this->validate(request(), [
-        'name' => 'required',
-        'unique_code' => 'required|max:8',
+        'name' => 'required|unique:groups,name,except,id',
+        'unique_code' => 'required|unique:groups,unique_code|max:8',
         ]);
 
         \Session::flash('flash_message', 'Success!  Your new group has been added.');
@@ -129,8 +129,8 @@ class GroupsController extends Controller
     {
         //
             $this->validate(request(), [
-                'name' => 'required',
-                'unique_code' => 'required',
+                'name' => 'required|unique:groups,name,'.$group->id,
+                'unique_code' => 'required|unique:groups,unique_code,'.$group->id,
         ]);
 
         $group->update(request(['id','name', 'unique_code', 'description']));

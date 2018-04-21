@@ -443,6 +443,10 @@ var defaults = {
     return data;
   }],
 
+  /**
+   * A timeout in milliseconds to abort a request. If set to 0 (default) a
+   * timeout is not created.
+   */
   timeout: 0,
 
   xsrfCookieName: 'XSRF-TOKEN',
@@ -31036,7 +31040,7 @@ Axios.prototype.request = function request(config) {
     }, arguments[1]);
   }
 
-  config = utils.merge(defaults, this.defaults, { method: 'get' }, config);
+  config = utils.merge(defaults, {method: 'get'}, this.defaults, config);
   config.method = config.method.toLowerCase();
 
   // Hook up interceptors middleware
@@ -31211,9 +31215,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
       if (utils.isArray(val)) {
         key = key + '[]';
-      }
-
-      if (!utils.isArray(val)) {
+      } else {
         val = [val];
       }
 
@@ -31808,7 +31810,6 @@ module.exports = __webpack_require__(40);
 /* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -31818,6 +31819,7 @@ module.exports = __webpack_require__(40);
 __webpack_require__(10);
 __webpack_require__(3);
 __webpack_require__(35);
+//import { Bar } from 'vue-chartjs';
 
 /*get the image from the Observation and show it the modal box */
 jQuery(document).ready(function ($) {
@@ -31861,6 +31863,11 @@ var app = new Vue({
 		if (~window.location.pathname.indexOf("teach-data/map")) {
 			this.dataURL = '/observations/mapdata?type=teach';
 			this.showObvMap();
+		}
+		//if Obv Map
+		if (~window.location.pathname.indexOf("observations/progress") || ~window.location.pathname.indexOf("teach-data/progress")) {
+			this.dataURL = '/observations/typebar';
+			this.showTypeChart();
 		}
 	},
 
@@ -32093,11 +32100,55 @@ var app = new Vue({
 				});
 			} //END IF
 
-		}
+		}, //End observation data method
 
-	}
+		showTypeChart: function showTypeChart() {
 
-});
+			var vm = this;
+			var filter = document.getElementById('obvChart').getAttribute('data-filter');
+			if (filter) {
+				vm.dataURL += "?filter=" + filter;
+			}
+
+			//GET ALL OBSERVATIONS	
+			$.getJSON(vm.dataURL, function (result) {
+
+				var ctx = document.getElementById("obvChart").getContext('2d');
+				var chartColors = dynamicColors(Object.keys(result.type).length);
+				console.log(chartColors);
+				var myChart = new Chart(ctx, {
+					type: 'bar',
+					data: {
+						labels: result.type,
+						datasets: [{
+							label: '# of Observations',
+							data: result.count,
+							backgroundColor: '#3cb434',
+							borderWidth: 2,
+							responsive: true
+
+						}]
+					}
+				});
+			});
+
+			var dynamicColors = function dynamicColors(x) {
+				mycolors = new Array();
+				for (i = 0; i < x; i++) {
+					var r = Math.floor(Math.random() * 255);
+					var g = Math.floor(Math.random() * 255);
+					var b = Math.floor(Math.random() * 255);
+
+					mycolors.push("rgb(" + r + "," + g + "," + b + ")");
+				}
+				return mycolors;
+			};
+		} //end type chart method
+
+
+		//END METHODS
+
+	} });
 
 /***/ }),
 /* 35 */

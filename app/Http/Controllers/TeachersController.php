@@ -125,11 +125,20 @@ class TeachersController extends Controller
     public function maps(Request $request)
     {
 
-       $filter = $request->filter;
+       $filter = Auth::user()->id;
        $observations = Observations::all();
 
        return view('teachers.maps', compact('observations', 'filter'));
     }
 
+    //return teacher's map data to view
+    public function charts(Request $request)
+    {
+
+       $filter = Auth::user()->id;
+       $observations = Observations::all();
+
+       return view('teachers.progress', compact('observations', 'filter'));
+    }
 
 }

@@ -22,12 +22,18 @@ Route::view('/help', 'help');
 /* OBSERVATION METHODS */
 Route::get('/observations', ['uses' => 'ObservationsController@index']);
 Route::get('/teach-data', ['uses' => 'TeachersController@teachdata']);
+Route::get('teach-data/maps', ['uses' => 'TeachersController@maps']);
+Route::get('teach-data/progress', ['uses' => 'TeachersController@charts']);
+Route::get('observations/maps', ['uses' => 'ObservationsController@maps']);
+Route::get('observations/progress', ['uses' => 'ObservationsController@type']);
+
+/* OBSERVATION DATA FEEDS/APIS */
+Route::get('/observations/mapdata', ['as' => 'observations.mapdata', 'uses' => 'ObservationsController@mapdata']);
+Route::get('/observations/typebar', ['as' => 'observations.typebar', 'uses' => 'ObservationsController@typebar']);
+Route::get('/observations/typestacked', ['as' => 'observations.typestacked', 'uses' => 'ObservationsController@typestacked']);
+Route::get('/observations/progdata', ['as' => 'observations.progdata', 'uses' => 'ObservationsController@progdata']);
 Route::get('/observations/datatables', ['as' => 'observations.datatables', 'uses' => 'ObservationsController@datatables']);
 Route::get('/observations/mydatatables', ['as' => 'teachers.mydatatables', 'uses' => 'TeachersController@mydatatables']);
-Route::get('observations/maps', ['uses' => 'ObservationsController@maps']);
-Route::get('teach-data/maps', ['uses' => 'TeachersController@maps']);
-Route::get('/observations/mapdata', ['as' => 'observations.mapdata', 'uses' => 'ObservationsController@mapdata']);
-Route::get('observations/progress', ['uses' => 'ObservationsController@typedata']);
 
 /* PROGRAM METHODS */
 Route::get('/programs', ['uses' => 'ProgramsController@index']);

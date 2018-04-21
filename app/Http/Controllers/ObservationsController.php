@@ -101,47 +101,112 @@ class ObservationsController extends Controller
        return $mapdata->toArray();
     }
 
-    public function typedata(Request $request)
+    public function typebar(Request $request)
     {
 
-        $obvCount = Observations::count();
-        $animalGroup = DB::table('observations')->distinct()->select(DB::raw('animalGroup as typeGroup'), DB::raw('count(*) as typeCount'))->where('animalGroup', '!=', 'null')->groupBy('animalGroup')->get();
+        $filter = $request->filter;
+        
+        $observations = Observations::all()->sortBy('obvType');
+        $observations->load('groups'); 
+        
+        if($filter)
+        {            
+            $filtered = $observations->where('groups.user_id', $filter);
+            $observations = collect();
+            $observations = $filtered;
+        } 
 
-        //add style color
-        //remove "-type" from end of string
-        $animalGroup->map(function($animal) {
-            $animal->styleColor = 'info';
-            $animal->typeGroup = ucfirst(substr($animal->typeGroup, 0, -5));
+        $typeGroup = $observations->groupBy('obvType');
 
-            return $animal;
+        //count the records for each group
+        $types = $typeGroup->map(function ($item, $key) {
+                return collect($item)->count();
         });
 
-
-
-        $plantType = DB::table('observations')->distinct()->select(DB::raw('plantKind as typeGroup'), DB::raw('count(*) as typeCount'))->where('plantKind', '!=', 'null')->groupBy('plantKind')->get();
-
-        //dd($plantType);
-        //change specific plant with "plant"
-        $plantType->each(function($plant) {
+        //remove null type records
+        $types->forget("");
         
-            $plant->typeGroup = 'Plant';
-            $plant->styleColor = 'success';
-            return $plant;
+        $typeData = array();
+        $typeData['type'] = array();
+        $typeData['count'] = array();
+        foreach($types->toArray() as $key => $value)
+        {
+            array_push($typeData['type'], $key);
+            array_push($typeData['count'], $value);                
+        } 
+
+        return response()->json($typeData);
+
+    }
+    public function typestacked(Request $request)
+    {
+
+        $filter = $request->filter;
+        
+        //$observations = Observations::all()->sortBy('obvType');
+        $groups = Groups::select('id as group_id')->where('user_id', $filter)->get();
+        $groupNames = $groups->pluck('group_id');
+        $groupNames->each(function($item, $key) {
+            $item = 'Hello';
         });
-
-        $typeData = $animalGroup;
-        $typeData = $typeData->merge($plantType);
+        //$groups = $observations->groupBy('groups.name');
+        //$grouptypes = $groups->keyBy('groups.name');
         
 
-        //sort data by type
-        $typeData->sortBy('typeGroup');
+        return response()->json($groupNames);
 
-       // dd($typeData);
+         //count the records for each group
+         $grouptypeCount= $grouptypes->map(function ($item, $key) {
+                 return collect($item)->count();
+         });
+        return response()->json($grouptypeCount);
+        // //remove null type records
+        // $types->forget("");
+        // return response()->json($types);
+        // $typeData = array();
+        // $typeData['type'] = array();
+        // $typeData['count'] = array();
+        // foreach($types->toArray() as $key => $value)
+        // {
+        //     array_push($typeData['type'], $key);
+        //     array_push($typeData['count'], $value);                
+        // } 
 
-        return view('observations.progress', compact('typeData'), compact('obvCount'));
+        return response()->json($typeData);
+
+    }
+    public function progdata(Request $request)
+    {
+
+        $observations = Observations::all();
+        $observations->load('groups', 'groups.users.programs');
+        $group_list = $observations->groupBy('group_id');
+
+        $programs = Programs::all();
+        $programs->load('users', 'users.groups', 'users.groups.observations');
+        
+        $prog_list = array();
+        $prog_list['programs'] = $programs->pluck('program');
+        //$prog_list['groups']
+
+        //dd($observations);
+        //dd($flatobv);
+
+        return response()->json($group_list);
 
     }
 
+    //return all observation type data to view
+    public function type(Request $request)
+    {
+
+       $filter = $request->filter;
+       $observations = Observations::all();
+
+       
+
+       return view('observations.progress', compact('observations'));
+    }
     /**
      * Show the form for creating a new resource.
      *

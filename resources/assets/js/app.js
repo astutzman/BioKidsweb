@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -8,6 +7,7 @@
 require('./bootstrap');
 require( 'jquery' );
 require( 'datatables.net' );
+//import { Bar } from 'vue-chartjs';
 
 /*get the image from the Observation and show it the modal box */
 jQuery(document).ready(function($) {
@@ -58,6 +58,13 @@ var app = new Vue({
 		 		this.dataURL = '/observations/mapdata?type=teach';
 		 		this.showObvMap();
 		 	}
+		 	//if Obv Map
+		 	if(~window.location.pathname.indexOf("observations/progress") || ~window.location.pathname.indexOf("teach-data/progress"))
+		 	{
+		 		this.dataURL = '/observations/typebar';
+		 		this.showTypeChart();
+		 	}
+
 	},
 
 	components: {
@@ -321,54 +328,87 @@ var app = new Vue({
 	        			
 	        		});
 	        			
+	    		});        		
+    		} //END IF
 
-	    	});        		
-    	} //END IF
+	    	if(filter === 'observations')
+	    	{
+	        	//GET ALL OBSERVATIONS	
+	    		$.getJSON("mapdata?filter="+filter, function(result){
+	        		obvMarkers = result;
 
-    	if(filter === 'observations')
-    	{
-        	//GET ALL OBSERVATIONS	
-    		$.getJSON("mapdata?filter="+filter, function(result){
-        		obvMarkers = result;
+	        		$.each(result, function(i, field){
 
-        		$.each(result, function(i, field){
+	        			//clean the data
+	        			var temp_position = {lat: parseFloat(field.groups.users.programs.latitude), lng:parseFloat(field.groups.users.programs.longitude)};
+	        			//add markers to map
+	        			//console.log(temp_position); 
+	        			var marker = new google.maps.Marker({position:temp_position , map:map, title:field.groups.users.programs.program});
 
-        			//clean the data
-        			var temp_position = {lat: parseFloat(field.groups.users.programs.latitude), lng:parseFloat(field.groups.users.programs.longitude)};
-        			//add markers to map
-        			//console.log(temp_position); 
-        			var marker = new google.maps.Marker({position:temp_position , map:map, title:field.groups.users.programs.program});
+	        			var iw =  new google.maps.InfoWindow;
+	        			
+						iw.setContent('<strong>'+marker.title+'</strong>');
 
-        			var iw =  new google.maps.InfoWindow;
-        			
-					iw.setContent('<strong>'+marker.title+'</strong>');
+						google.maps.event.addListener(marker, "click", function(event) {
 
-					google.maps.event.addListener(marker, "click", function(event) {
+						iw.open(map, marker);
+						});
+	 
+	        		}); 
+	        			
+	        			//push marker to array
+	        			
+	        	});
 
-					iw.open(map, marker);
-					});
- 
-        		}); 
-        			
-        			//push marker to array
-        			
+	    	} //END IF
+
+
+		}, //End observation data method
+
+		showTypeChart: function() {
+
+			var vm = this;
+			var filter = document.getElementById('obvChart').getAttribute('data-filter');
+			if(filter) {vm.dataURL+="?filter="+filter;}
+			
+			//GET ALL OBSERVATIONS	
+    		$.getJSON(vm.dataURL, function(result){		
+
+					var ctx = document.getElementById("obvChart").getContext('2d');
+					let chartColors = dynamicColors(Object.keys(result.type).length);
+					console.log(chartColors);
+					var myChart = new Chart(ctx, {
+		    			type: 'bar',
+		    			data: {
+		        			labels: result.type,
+		        			datasets: [{
+		            		label: '# of Observations',
+		            		data: result.count,
+		            		backgroundColor: '#3cb434',
+		            		borderWidth: 2,
+		            		responsive: true,
+		            		
+		            		}]
+		           		}
+		            });
         	});
 
-    	} //END IF
+        	var dynamicColors = function(x) {
+    			mycolors = new Array();
+    			for(i=0; i < x; i++) {
+    				var r = Math.floor(Math.random() * 255);
+    				var g = Math.floor(Math.random() * 255);
+    				var b = Math.floor(Math.random() * 255);
+
+    				mycolors.push("rgb(" + r + "," + g + "," + b + ")");
+    			}
+    			return mycolors;
+			}
+			
+		} //end type chart method
 
 
-
-		}
-
-
-	}
+	} //END METHODS
 
 });
-
-
-
-
-
-
-
 

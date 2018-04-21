@@ -26,6 +26,7 @@ class Observations extends Model
         }
         else //set plant/grass type
         {
+            if(strpos($this->plantKind, 'Herb')) {$this->plantKind = 'Weeds';}
             return ($this->plantKind ? $this->plantKind : $this->grassKind);
 
         }

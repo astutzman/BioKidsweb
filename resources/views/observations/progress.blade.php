@@ -6,7 +6,6 @@
 
 @section('content')
 
-
 <div class="row">
 
 
@@ -21,20 +20,15 @@
 
         <h4>Number of Observations by Type</h4>
 
-          @foreach($typeData as $type)
-        <h5>{{$type->typeGroup}}</h5>
-        <div class="progress">                      
-            <div class="progress-bar progress-bar-{{$type->styleColor}}" style="width: {{intval(100*($type->typeCount/$obvCount))}}%">{{$type->typeCount}}</div>
-        </div>
-          @endforeach
-
+          <canvas id="obvChart" height="50" ></canvas>    
     </div>
-		
+	        
 
 </div>
 
 @endsection
 
 @section('footer')
+
 	@include('layouts.footer')
 @endsection
