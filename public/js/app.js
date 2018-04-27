@@ -32036,9 +32036,13 @@ var app = new Vue({
 		addObvMarkers: function addObvMarkers() {
 
 			var obvMarkers = new Array();
-			var filter = document.getElementById('map').getAttribute('data-filter');
+			var filter = '';
+			//var filter = document.getElementById('obvChart').getAttribute('data-filter');
+			if (filter) {
+				vm.dataURL += "?filter=" + filter;
+			}
 
-			console.log('filter: ' + filter);
+			//console.log('filter: '+filter);
 			//GET OBSERVATIONS BY PROGRAM
 			if (!filter) {
 				$.getJSON(this.dataURL, function (result) {

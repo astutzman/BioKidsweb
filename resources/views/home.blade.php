@@ -8,6 +8,7 @@
         </div>
     </div>
 </div>
+<style>.new-btn{display:none;}</style>
 @endsection
 
 <!-- @section('content')

@@ -19,9 +19,9 @@
             <li class=""><a href="{{ url('/observations/progress')}}">Charts</a></li>
         </ul>
         <div class="text-right" style="padding-left:20px;">Map Filters:
-                <span><a href="{{ url('maps') }}">Programs and Groups</a></span>
+                <span><a href="{{ url('/observations/maps') }}">Programs and Groups</a></span>
                 <span>|</span>
-                <span><a href="{{ url('maps?filter=observations') }}">Observation Map</a></span>
+                <span><a href="{{ url('/observations/maps?filter=observations') }}">Observation Map</a></span>
         </div>
 		
         <div id ="obvMap" class="well">

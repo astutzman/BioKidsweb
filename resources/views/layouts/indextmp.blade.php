@@ -23,7 +23,7 @@
 					<div class="col-sm-6 h2 text-left">
 						{{$template_vars['titlepl']}}
 					</div>
-					<div id="index_btn" class="col-sm-6 text-right">
+					<div id="index_btn" class="col-sm-6 text-right new-button">
 						<a href="{{strtolower($template_vars['titlepl'])}}/create" class="btn btn-primary">New {{$template_vars['title']}}</a>
 					</div>
 				</div>
