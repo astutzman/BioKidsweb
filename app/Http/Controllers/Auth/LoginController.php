@@ -49,16 +49,18 @@ class LoginController extends Controller
         $request['captcha-verified'] = $this->verifyCaptcha($request['g-recaptcha-response']);
 
         //flash error message for recaptcha error
-        if($request['captcha-verified'] === false)
-        {
+        //if($request['captcha-verified'] === false)
+        //{
 
-            \Session::flash('flash_error', 'Please verify that you are not a robot!');
-        }
+        //    \Session::flash('flash_error', 'Please verify that you are not a robot!');
+        //}
         
+        //$this->validate($request, [
+        //    $this->username() => 'required', 'password' => 'required', 'g-recaptcha-response' => 'required'
+        //]);
         $this->validate($request, [
-            $this->username() => 'required', 'password' => 'required', 'g-recaptcha-response' => 'required'
+            $this->username() => 'required', 'password' => 'required'
         ]);
-
         
 
 

@@ -77,16 +77,16 @@ class ObservationsController extends Controller
                 
                 if($request->type) //get teacher map data
                 {
-                $user_id = Auth::user()->id;
-                $user_prog = DB::table('users')->select('program_id')->where('id', $user_id)->first();
+                    $user_id = Auth::user()->id;
+                    $user_prog = DB::table('users')->select('program_id')->where('id', $user_id)->first();
 
-                $mapdata = Programs::where('id', $user_prog->program_id)->get();
-                $mapdata->load('users', 'users.groups', 'users.groups.observations.pgroups');
+                    $mapdata = Programs::where('id', $user_prog->program_id)->get();
+                    $mapdata->load('users', 'users.groups', 'users.groups.observations.pgroups');
                 }
                 else //get all data
                 {
-                $mapdata = Programs::all();
-                $mapdata->load('users', 'users.groups', 'users.groups.observations.pgroups');
+                    $mapdata = Programs::all();
+                    $mapdata->load('users', 'users.groups', 'users.groups.observations.pgroups');
                 }
 
            }

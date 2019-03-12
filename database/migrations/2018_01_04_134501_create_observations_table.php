@@ -22,13 +22,16 @@ class CreateObservationsTable extends Migration
             $table->text('plantKind');
             $table->text('grassKind');
             $table->text('howMuchPlant');
-            $table->text('howManySeen');
+            $table->integer('howManySeen');
             $table->text('animalGroup');
             $table->text('animalType');
             $table->text('animalSubType');
             $table->text('note');
             $table->text('howManyIsExact');
             $table->text('photoLocation');
+            $table->integer('location_id');
+            $table->text('animalPosition');
+            $table->text('animalAction');
             $table->timestamps();
         });
     }

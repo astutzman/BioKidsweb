@@ -1,79 +1,60 @@
-<div class="bs-docs-section clearfix">
-  <div class="row">
-      <div class="col-lg-12">
-          <div class="bs-component">
-            <nav class="navbar navbar-default navbar-static-top">
-                <div class="container-fluid"> <!--container -->
-                  <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                      <span class="sr-only">Toggle navigation</span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{{url('/')}}">Philly Scientists</a>
-                  </div>
+<nav id="mynav" class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a style="font-size:1.8em;margin-top:20px;" class="navbar-brand" href="{{url('/')}}">Philly Scientists</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobileMenu" aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                      <li class="{{ set_active('/') }}" ><a href="{{ url('/') }}">Home</a></li>
-                      <li class="{{ set_active('observations*') }}" ><a href="{{url('/observations')}}">Observations</a></li>
-                      <li class="{{ set_active('about')}}"><a href="{{url('/help')}}">Help</a></li>
-                    </ul>
-                    @auth
-                      <!--Admin Navigation -->
-                       @if(Auth::user()->role == 'admin')                     
-                        <ul id="navRole" class="nav navbar-nav danger">
-                          <li class="{{ set_active('programs*') }}" style="border:solid 2px #2d3e4f;"><a href="{{url('/programs')}}">Programs</a></li>
-                          <li class="{{ set_active('teachers*')}}" style="border:solid 2px #2d3e4f;"><a href="{{url('/teachers')}}">Teachers</a></li>
-                        </ul>
-                        @endif
-                      <!--Teacher Navigation -->
-                      @if(Auth::user()->role == 'teacher')
-                        <ul id="navRole" class="nav navbar-nav ">
-                          <li  class="{{ set_active('groups*')}}"style="border:solid 2px #2d3e4f;"><a href="{{url('/groups')}}">Groups</a></li>
-                          <li  class="{{ set_active('locations*') }}"style="border:solid 2px #2d3e4f;"><a href="{{url('/locations')}}">Locations</a></li>
-                          <li class="{{ set_active('teach-data*') }}"style="border:solid 2px #2d3e4f;"><a href="{{url('/teach-data')}}">My Observations</a></li>
-                        </ul>
-                      @endif
-                    @endauth
+  <div style="margin-top:20px;font-size:1.2em;" class="collapse navbar-collapse" id="mobileMenu">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item {{ set_active('/') }}" ><a class="nav-link" href="{{ url('/') }}">Home</a></li>
+      <li class="nav-item {{ set_active('observations*') }}" ><a class="nav-link" href="{{url('/observations')}}">Observations</a></li>
+      <li <li class="nav-item {{ set_active('about')}}"><a class="nav-link" href="{{url('/help')}}">Help</a></li>
+        @auth
+          <!--Admin Navigation -->
+           @if(Auth::user()->role == 'admin')                     
+              <li class="nav-item {{ set_active('programs*') }}" style="border:solid 2px #2d3e4f;"><a  class="nav-link" href="{{url('/programs')}}">Programs</a></li>
+              <li class="nav-item {{ set_active('teachers*')}}" style="border:solid 2px #2d3e4f;"><a  class="nav-link" href="{{url('/teachers')}}">Teachers</a></li>
+            @endif
+          <!--Teacher Navigation -->
+          @if(Auth::user()->role == 'teacher')
+              <li  class="nav-item {{ set_active('groups*')}}" style="border:solid 2px #2d3e4f;"><a href="{{url('/groups')}}" class="nav-link">Groups</a></li>
+              <li  class="{{ set_active('locations*') }}" style="border:solid 2px #2d3e4f;"><a href="{{url('/locations')}}" class="nav-link">Locations</a></li>
+              <li class="nav-item {{ set_active('teach-data*') }}" style="border:solid 2px #2d3e4f;"><a href="{{url('/teach-data')}}" class="nav-link">My Observations</a></li>
+          @endif
+        @endauth
+      </ul>
                 
-                    <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                      <!-- Left Side Of Navbar -->
-                      <ul class="nav navbar-nav">
-                        &nbsp;
-                      </ul>
-                      <!-- Right Side Of Navbar -->
-                      <ul class="nav navbar-nav navbar-right">
-                      <!-- Authentication Links -->
-                        @guest
-                        <li><a href="{{ route('login') }}">Login</a></li>
-                        <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                          </a>
+      <!-- Right Side Of Navbar -->
+      <ul class="navbar-nav ml-auto">
+      <!-- Authentication Links -->
+      @guest
+          <li class="nav-item">
+              <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+          </li>
+          @if (Route::has('register'))
+              <li class="nav-item">
+                  <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+              </li>
+          @endif
+        @else
+          <li class="nav-item dropdown">
+              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                  {{ Auth::user()->name }} <span class="caret"></span>
+              </a>
 
-                          <ul class="dropdown-menu">
-                              <li>
-                                  <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Logout
-                                  </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{{ route('logout') }}"
+                     onclick="event.preventDefault();
+                                   document.getElementById('logout-form').submit();">
+                      {{ __('Logout') }}
+                  </a>
 
-                                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                  </form>
-                              </li>
-                          </ul>
-                        </li>
-                      @endguest
-                    </ul>
-                  </div>
-                </div>
-              </div> <!--container -->
-            </nav>
-          </div>
-        </div>
-  </div>
-</div>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      @csrf
+                  </form>
+              </div>
+          </li>
+        @endguest
+      </ul>
+    </div>
+</nav>

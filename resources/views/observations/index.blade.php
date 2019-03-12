@@ -10,14 +10,16 @@
 <div class="row">
 
 
-<h2>Student Observations</h2>
+<h3 style="padding:10px;">Student Observations</h3>
 
     <div class="container">
-        <ul class="nav nav-pills nav-inverse" style="padding:5px;">
-            <li class="active"><a href="#">Data</a></li>
-            <li class=""><a href="{{ url('observations/maps') }}">Map</a></li>
-            <li class=""><a href="{{ url('observations/progress') }}">Charts</a></li>
+      <div>
+        <ul class="pagination">
+          <li class="page-item active"><a class="page-link" href="#">Data</a></li>
+          <li class="page-item"><a class="page-link" href="{{ url('observations/maps') }}">Map</a></li>
+          <li class="page-item"><a class="page-link" href="{{ url('observations/progress') }}">Charts</a></li>
         </ul>
+      </div>
 		
         <div id ="obvTable" class="well">
             <table id="observeTable" class="display table table-striped table-hover" width="100%">

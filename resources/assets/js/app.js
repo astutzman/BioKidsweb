@@ -4,8 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
-require( 'jquery' );
+//require('./bootstrap');
+//require( 'jquery' );
 require( 'datatables.net' );
 //import { Bar } from 'vue-chartjs';
 
@@ -61,8 +61,9 @@ var app = new Vue({
 		 	//if Obv Map
 		 	if(~window.location.pathname.indexOf("observations/progress") || ~window.location.pathname.indexOf("teach-data/progress"))
 		 	{
-		 		this.dataURL = '/observations/typebar';
+		 		this.dataURL = '/observations/chartbar';
 		 		this.showTypeChart();
+
 		 	}
 
 	},
@@ -152,8 +153,7 @@ var app = new Vue({
 				 				
 				 				geo_results = results[0];
 				 				if(results[0])
-				 				{
-				 					
+				 				{		 					
 				 					//update hidden Lat/Lng fields
 				 					//check if business name is in first field by checking for numbers
 				 					if(/\d/.test(results[0].address_components[0].short_name)){
@@ -173,7 +173,6 @@ var app = new Vue({
 				 					else {
 				 						vm.$data.mapzip = results[0].address_components[8].short_name;
 				 					}
-				 					//console.log($('#zipField').value);
 
 				 					infowindow.setContent('<strong>The street address is:</strong><br /><br />'+
 				 						results[0].formatted_address+'<br /><br />'+
@@ -189,48 +188,41 @@ var app = new Vue({
 				 				{
 				 					window.alert('No street address found');
 				 				}
-				 			}
-				 			
+				 			}				 			
 				 			else 
 				 			{
-
 				 				window.alert('Sorry!  We could not get the address due to:' + status);
 				 			}
 				 		});
 
 		 			});
-	 			
-
 		},
 
 		showDataTable: function() {
 
 				var vm = this;
 
-
-
 				$(document).ready(function() {
 				    dataTable = $('#observeTable').DataTable({
-				    	dom: 'Bfrtip',
-				    	pagingType: 'simple_numbers',
+				    	//dom: 'Bfrtip',
+				    	//pagingType: 'simple_numbers',
 				        processing: true,
 				        serverSide: true,
 				        ajax: vm.dataURL,
 				        defaultContent: "<i>empty</i>",
 				        scrollX: true,
 				        columnDefs:[
-				        	{
-				        		targets: [2,4,9,10,12,13],
-				        		className: 'noVis',
-				        		visible: false
-				        	},
+//				        	{
+				        		//targets: [],
+				        		//className: 'noVis',
+				        		//visible: false
+//				        	},
 				        	{
 				        	    render: function ( data, type, row ) {
 				        	    	return '<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#obvmodal" onClick="updateModal('+"'"+data+"'"+')">View</button>';
 				                },
-				                targets: 14
+				                targets: 5
 				            } 
-
 				        ],
 				        buttons: [
 					        {
@@ -240,58 +232,41 @@ var app = new Vue({
 				        ],
 				        columns:[
 				        	{data: 'id', title: 'ID'},
-				        	{data: 'obvType', title: 'Type'},
-				        	{data: 'animalGroup', title:'Animal'},
-				        	{data: 'animalType', title:'Animal Type'},
-				        	{data: 'animalSubType', title: 'Sub Type'},				        	
-				        	{data: 'howSensed', title:'How?'},
-				        	{data: 'animalPosition', title:'Where?'},
-				        	{data: 'animalAction', title:'Doing?'},
-				        	{data: 'plantKind', title: 'Plant'},
-				        	{data: 'grassKind', title: 'Grass'},
-				        	{data: 'howMuchPlant', title: 'Plant#'},
+				        	{data: 'type', title: 'Type'},
+				        	{data: 'species', title:'Species'},
 				        	{data: 'howManySeen', title: 'Count'},
-				        	{data: 'howManyIsExact', title: 'Exact#'},				        	
-				        	{data: 'note', title: 'Note'},
-				        	{data: 'photoLocation', title:'Image'},
-				        	{data: 'groups.name', title: 'Group'},
-				        	{data: 'groups.users.programs.program', title: 'Program'},				        	
-				        	{data: 'created_at', type: 'date-dd-mmm-yyyy', target: 17,title: 'Date'}
-
+				        	{data: 'location_name', title: 'Location'},				        	
+				        	{data: 'photo', title:'Image'}
 				        ]
 
 				    });
 				});
 
-
 		},
 
 		showObvMap: function(){
-
 
 					//start location at ExCITe Center
 					this.$data.maplng = -75.191729;
 					this.$data.maplat =  39.956175;
 
 					map = new google.maps.Map(document.getElementById('map'), {
-		          		zoom: 14,
+		          		zoom: 15,
 		          		center: {lat:this.maplat, lng: this.maplng}
 		        	});
 
 		        	//get markers
 		        	this.addObvMarkers();
-
-		        
+	        
 		},
 
 		addObvMarkers: function(){
 
 			var obvMarkers = new Array();
 			var filter = '';
-			//var filter = document.getElementById('obvChart').getAttribute('data-filter');
+			
 			if(filter) {vm.dataURL+="?filter="+filter;}
 
-	 		//console.log('filter: '+filter);
         	//GET OBSERVATIONS BY PROGRAM
         	if(!filter)
         	{
@@ -301,32 +276,22 @@ var app = new Vue({
 					$.each(result, function(i, field){
 						
 	        			//clean the data
-	        			temp_position = {lat: parseFloat(field.latitude), lng:parseFloat(field.longitude)};
+	        			temp_position = {lat: parseFloat(field[0].latitude), lng:parseFloat(field[0].longitude)};
 	        			
 	        			//add markers to map 
-	        			var marker = new google.maps.Marker({position:{lat:parseFloat(field.latitude), lng:parseFloat(field.longitude)} , map:map, title:field.program});
+	        			var marker = new google.maps.Marker({position:{lat:parseFloat(field[0].latitude), lng:parseFloat(field[0].longitude)} , map:map, title:field.location_name});
 
 	        			var iw = new google.maps.InfoWindow;
-	        			var iwContent = '<ul>';
-	        			$.each(field.users, function(x, teachers) {
-	        				//console.log(teachers);
-	        				$.each(teachers.groups, function(y, tgroups){
-	        				console.log(tgroups);
-	        					iwContent += '<li>'+tgroups.name+': '+tgroups.observations.length+' records</li>';	
-	        				});
-	        				
-	        			});
-	        			iwContent += '</ul>';
-	        			iw.setContent('<strong>'+field.program+'</strong><div>'+iwContent+'</div>');
+	        			var iwContent = field.length+' observations';
+	        			iw.setContent('<strong>'+field[0].location_name+'</strong><div>'+iwContent+'</div>');
 	        			
 	        			google.maps.event.addListener(marker, "click", function(event) {  
 
 			            	//show marker with address
 			            	iw.open(map, marker);
 			            
-	        			}); 
-	        			
-	        			
+	        			});
+	        			       			
 	        		});
 	        			
 	    		});        		
@@ -374,7 +339,7 @@ var app = new Vue({
 			
 			//GET ALL OBSERVATIONS	
     		$.getJSON(vm.dataURL, function(result){		
-
+    			
 					var ctx = document.getElementById("obvChart").getContext('2d');
 					let chartColors = dynamicColors(Object.keys(result.type).length);
 					console.log(chartColors);

@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Observations;
+use App\ObservationView;
 use App\Groups;
 use Illuminate\Http\Response;
 use Yajra\Datatables\Datatables;
 use Auth;
+use DB;
 
 class TeachersController extends Controller
 {
@@ -116,7 +118,9 @@ class TeachersController extends Controller
     public function teachdata()
     {
        
-       $observations = Observations::all();
+       $observations = DB::table('observations')->select('*')->whereIn('group_id', function($query){
+            $query->select('id')->from('groups')->where('id', Auth::user()->id);
+       })->get();;
 
        return view('teachers.observations', compact('observations'));
     }
@@ -126,7 +130,9 @@ class TeachersController extends Controller
     {
 
        $filter = Auth::user()->id;
-       $observations = Observations::all();
+       $observations = DB::table('observations')->select('*')->whereIn('group_id', function($query){
+            $query->select('id')->from('groups')->where('user_id', Auth::user()->id);
+       })->get();
 
        return view('teachers.maps', compact('observations', 'filter'));
     }
@@ -135,10 +141,23 @@ class TeachersController extends Controller
     public function charts(Request $request)
     {
 
+       //get the id of logged in user
        $filter = Auth::user()->id;
-       $observations = Observations::all();
+       
+       //get all of the user's groups
+       $groups = Groups::select('id', 'name')->where('user_id', $filter)->get();
+       
+       //get all of the user's locations
+       $locations = DB::table("observation_views")->select('location_id', 'location_name')->groupBy('location_id')->whereIn('group_id', function($query){
+            $query->select('id')->from('groups')->where('user_id', Auth::user()->id);
+       })->get();
 
-       return view('teachers.progress', compact('observations', 'filter'));
+       //get all of the observations for the user's groups
+       $observations = DB::table("observation_views")->select('*')->whereIn('group_id', function($query){
+            $query->select('id')->from('groups')->where('user_id', Auth::user()->id);
+       })->get();
+
+       return view('teachers.progress', compact('observations', 'filter', 'groups', 'locations'));
     }
 
 }

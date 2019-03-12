@@ -10,14 +10,16 @@
 <div class="row">
 
 
-<h2>Student Observations</h2>
+<h3 style="padding:10px;">Student Observations</h3>
 
     <div class="container">
-        <ul class="nav nav-pills nav-inverse" style="padding:5px;">
-            <li class=""><a href="{{ url('/observations')}}">Data</a></li>
-            <li class="active"><a href="{{ url('/observations/maps') }}">Map</a></li>
-            <li class=""><a href="{{ url('/observations/progress')}}">Charts</a></li>
+      <div>
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="{{ url('observations/') }}">Data</a></li>
+          <li class="page-item active"><a class="page-link" href="#">Map</a></li>
+          <li class="page-item"><a class="page-link" href="{{ url('observations/progress') }}">Charts</a></li>
         </ul>
+      </div>
         <div class="text-right" style="padding-left:20px;">Map Filters:
                 <span><a href="{{ url('/observations/maps') }}">Programs and Groups</a></span>
                 <span>|</span>
