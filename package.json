@@ -20,7 +20,7 @@
     },
     "dependencies": {
         "bootstrap-table": "^1.11.2",
-        "chart.js": "2.7.x",
+        "chart.js": "2.9.x",
         "chartjs": "^0.3.24",
         "datatables": "^1.10.13",
         "datatables.net-dt": "^1.10.16",
