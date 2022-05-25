@@ -1143,10 +1143,10 @@ bootstrap-sass@^3.3.7:
   resolved "https://registry.yarnpkg.com/bootstrap-sass/-/bootstrap-sass-3.3.7.tgz#6596c7ab40f6637393323ab0bc80d064fc630498"
   integrity sha1-ZZbHq0D2Y3OTMjqwvIDQZPxjBJg=
 
-bootstrap-table@^1.11.2:
-  version "1.12.1"
-  resolved "https://registry.yarnpkg.com/bootstrap-table/-/bootstrap-table-1.12.1.tgz#c9c3973067842a937c05d8639ecccb02abd6ba65"
-  integrity sha1-ycOXMGeEKpN8BdhjnszLAqvWumU=
+bootstrap-table@^1.20.2:
+  version "1.20.2"
+  resolved "https://registry.yarnpkg.com/bootstrap-table/-/bootstrap-table-1.20.2.tgz#187fcd1812fa3422f964e3b32e3fc3d266108a83"
+  integrity sha512-6j9zfjjK6VZyJj8KsH+LnGczqglmMvMctGAoEAKDvrQ92ExQbA3mHGYPQr9iPrzoyeGL8+6Dyx6LqJbWmWmBoA==
 
 brace-expansion@^1.0.0, brace-expansion@^1.1.7:
   version "1.1.11"
